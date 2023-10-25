@@ -1,17 +1,21 @@
 import cv2
 import numpy as np
+from find_rgb import load_rgb_files
 
 # Load data
 
-r = cv2.imread("test_images/first/red.jpg")
-g = cv2.imread("test_images/first/green.jpg")
-b = cv2.imread("test_images/first/blue.jpg")
+r, g, b = load_rgb_files("test_images/makerspace")
 
 # Convert each image to grayscale, and to floating point values
 
 r = cv2.cvtColor(r, cv2.COLOR_BGR2GRAY).astype(float)
 g = cv2.cvtColor(g, cv2.COLOR_BGR2GRAY).astype(float)
 b = cv2.cvtColor(b, cv2.COLOR_BGR2GRAY).astype(float)
+
+# greyworld white balance
+r /= np.sum(r)
+g /= np.sum(g)
+b /= np.sum(b)
 
 # Create image by combining the three channels
 bgr = cv2.merge((b, g, r))
@@ -31,7 +35,7 @@ max_intensity = 1.1*np.max(white)  # For later
 diffs = bgr - white3
 
 # Scale the chromatic part
-diffs *= 10
+diffs *= 3
 
 # Create image to show by adding back the intensity
 show = white3 + diffs
