@@ -5,6 +5,11 @@ Janky RGB image merging for a janky scanner based camera.
 
 Usage: python combine.py [directory-and-file-prefix-for-channels]
 
+Say you have images called `jank_image_blue.jpg`, `jank_red.png` and `jank_green.jpg` in
+a directory called `my_lovely_images` use
+
+e.g. python combine.py my_lovely_images/jank
+
 User controls
 -------------
 

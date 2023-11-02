@@ -6,15 +6,15 @@ import numpy as np
 
 from find_rgb import load_rgb_files_as_bgr_image
 
-# source = sys.argv[1]
-
-source = "test_images/makerspace"
+source = sys.argv[1]
 
 #
 # Parameters
 #
 
 window_title = "Colour Merger"
+color_correction_input_amount = 0.01
+
 
 #
 # Main part
@@ -32,16 +32,11 @@ im = load_rgb_files_as_bgr_image(directory, prefix)
 # rotate
 im = cv2.rotate(im, cv2.ROTATE_90_COUNTERCLOCKWISE)
 
-
-print(np.max(im), np.min(im))
-
+# colour correction variables
 chroma_factor = 1.0
-
 color_correction_r = 1/3
 color_correction_g = 1/3
 color_correction_b = 1/3
-
-color_correction_input_amount = 0.01
 
 def normalise_color_correction():
     """ Happens for all colour correction changes"""
