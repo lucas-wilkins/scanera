@@ -34,9 +34,20 @@ def find_files(directory: str = ".", prefix: str="") -> Tuple[str, str, str]:
     elif any([l > 1 for l in lens]):
         raise FileExistsError("Found more files with that pattern than expected")
 
-    return r[0], g[0], b[0
-    ]
+    return r[0], g[0], b[0]
+
 def load_rgb_files(directory: str = ".", prefix: str="") -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     r, g, b = find_files(directory, prefix)
 
-    return cv2.imread(r), cv2.imread(g), cv2.imread(b)
+    r_im, g_im, b_im = cv2.imread(r), cv2.imread(g), cv2.imread(b)
+
+    return r_im, g_im, b_im
+
+def load_rgb_files_as_bgr_image(directory: str=".", prefix: str="") -> np.ndarray:
+    r, g, b = load_rgb_files(directory, prefix)
+
+    r = cv2.cvtColor(r, cv2.COLOR_BGR2GRAY).astype(float)
+    g = cv2.cvtColor(g, cv2.COLOR_BGR2GRAY).astype(float)
+    b = cv2.cvtColor(b, cv2.COLOR_BGR2GRAY).astype(float)
+
+    return cv2.merge((b,g,r))
