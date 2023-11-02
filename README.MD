@@ -3,7 +3,7 @@ Scanera Image Merging
 
 Janky RGB image merging for a janky scanner based camera.
 
-Usage: python convert.py [directory-and-file-prefix-for-channels]
+Usage: python combine.py [directory-and-file-prefix-for-channels]
 
 User controls
 -------------
