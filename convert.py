@@ -44,6 +44,7 @@ color_correction_b = 1/3
 color_correction_input_amount = 0.01
 
 def normalise_color_correction():
+    """ Happens for all colour correction changes"""
     global color_correction_r, color_correction_g, color_correction_b
 
     total = color_correction_r + color_correction_g + color_correction_b
@@ -55,6 +56,7 @@ def normalise_color_correction():
     print("Color correction (r,g,b):", color_correction_r, color_correction_g, color_correction_b)
 
 def to_displayable(im, chroma_factor=1.0):
+    """Create the image we want to show"""
 
     # Make an image which is just the intensity
     white = np.sum(im, axis=2)/3
@@ -95,6 +97,7 @@ def to_displayable(im, chroma_factor=1.0):
 
     return output
 
+# Interface loop
 while True:
     show = to_displayable(im, chroma_factor=chroma_factor)
 
@@ -142,7 +145,6 @@ while True:
     elif key == ord('v'):
         color_correction_b -= color_correction_input_amount
         normalise_color_correction()
-
 
     else:
         pass
